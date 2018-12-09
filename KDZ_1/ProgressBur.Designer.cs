@@ -34,7 +34,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(37, 34);
+            this.progressBar1.Location = new System.Drawing.Point(35, 54);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(260, 33);
             this.progressBar1.TabIndex = 0;
@@ -42,20 +42,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 3);
+            this.label1.Location = new System.Drawing.Point(32, 9);
+            this.label1.MaximumSize = new System.Drawing.Size(274, 139);
+            this.label1.MinimumSize = new System.Drawing.Size(274, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 26);
+            this.label1.Size = new System.Drawing.Size(274, 39);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Происходит отрисовка фрактала.\nПожалуйста дождитесь завершения.";
+            this.label1.Text = "Происходит отрисовка фрактала.\nПожалуйста дождитесь завершения.\nДля прерывания по" +
+    "строения закройте данное окно.";
             // 
             // ProgressBur
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(324, 79);
+            this.ClientSize = new System.Drawing.Size(324, 99);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(340, 138);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(340, 138);
             this.Name = "ProgressBur";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Происходит отрисовка фрактала";

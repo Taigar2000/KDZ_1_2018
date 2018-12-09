@@ -33,7 +33,7 @@ namespace KDZ_1
             init();
             //this.TopMost = true;
             this.Hide();
-            this.Enabled = false;
+            //this.Enabled = false;
             this.Visible = false;
             timer.Interval = 10; //интервал между срабатываниями 10 миллисекунд
             timer.Tick += new EventHandler(Draw);
@@ -61,6 +61,7 @@ namespace KDZ_1
             //}
             //this.Hide();
             //this.TopMost = false;
+            this.Enabled = true;
             Invalidate();
         }
 
