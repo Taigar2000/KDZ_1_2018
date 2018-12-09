@@ -238,6 +238,7 @@ namespace KDZ_1
                 DropExWindow(message);
                 return;
             }
+            textBox1_TextChanged();
             if (f) Init();
             try
             {
@@ -291,7 +292,7 @@ namespace KDZ_1
                 //Frac.pb.Enabled = false;
                 //this.TopMost = true;
             }
-            Invalidate();
+            //Invalidate();
         }
 
         /// <summary>
@@ -435,7 +436,7 @@ namespace KDZ_1
             {
                 Init();
             }
-            if (e.KeyCode == Keys.Q)
+            if (e.KeyCode == Keys.E)
             {
                 ZoomUp();
                 if (Frac == null)
@@ -447,7 +448,7 @@ namespace KDZ_1
                     this.textBox1.Text = $"{this.Frac.scale:f3}";
                 }
             }
-            if (e.KeyCode == Keys.E)
+            if (e.KeyCode == Keys.Q)
             {
                 ZoomDown();
                 this.label5.Text = $"Масштаб: ";
@@ -460,7 +461,6 @@ namespace KDZ_1
                     this.textBox1.Text = $"{this.Frac.scale:f3}";
                 }
             }
-            //Only for developer
             if (e.KeyCode == Keys.B)
             {
                 if (checkBox_buffer.Checked)
@@ -474,6 +474,11 @@ namespace KDZ_1
                     checkBox_buffer.Checked = true;
                 }
             }
+            if (e.KeyCode == Keys.Enter)
+            {
+                Rewrite();
+            }
+            ////Only for developer
             //Text = "" + (e.KeyValue);
         }
 
@@ -546,6 +551,7 @@ namespace KDZ_1
         void ZoomUp()
         {
             Frac.scale *= (float)1.5;
+            this.textBox1.Text = Frac.scale.ToString();
             Rewrite();
         }
 
@@ -569,6 +575,7 @@ namespace KDZ_1
         void ZoomDown()
         {
             Frac.scale /= (float)1.5;
+            this.textBox1.Text = Frac.scale.ToString();
             Rewrite();
         }
 
@@ -753,7 +760,30 @@ namespace KDZ_1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        //private void textBox1_TextChanged(object sender, EventArgs e)
+        //{
+        //    float sc;
+        //    if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }
+        //    if (Frac == null) return;
+        //    Frac.xspace = this.pictureBox1.Width;
+        //    Frac.yspace = 22;
+        //    //posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
+        //    //posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
+        //    Frac.xleft = posx;
+        //    Frac.yleft = posy;
+        //    Frac.scale = sc;
+        //    if (!Frac.scf || !Frac.ecf) return;
+        //    //DrawFractal();
+        //    //Rewrite();
+        //    //Invalidate();
+        //}
+
+        /// <summary>
+        /// Изменение масштаба через поле для ввода
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox1_TextChanged()
         {
             float sc;
             if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }

@@ -59,6 +59,7 @@
             this.Name = "ProgressBur";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Происходит отрисовка фрактала";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProgressBur_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

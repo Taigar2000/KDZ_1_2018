@@ -51,7 +51,7 @@ namespace KDZ_1
                 catch (Exception ex)
                 {
                     Console.WriteLine("Произошла непредвиденная ошибка\n" + ex.Message + '\n' + ex.Source + '\n' + ex.StackTrace + '\n' + ex.ToString());
-                    Console.WriteLine("\nДля выхода из программы нажмите ESC иначе - любую клавишу");
+                    Console.WriteLine("\nДля выхода из программы нажмите ESC\n Для перезапуска программы - клавишу Enter");
                     if (Console.ReadKey(true).Key != ConsoleKey.Escape) continue;
                 }
                 break;

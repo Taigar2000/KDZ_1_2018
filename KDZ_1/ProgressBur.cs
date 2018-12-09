@@ -79,5 +79,18 @@ namespace KDZ_1
             }
             //Hide();
         }
+
+        /// <summary>
+        /// Отлов нажатий клавиш
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProgressBur_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.OnFormClosing(new FormClosingEventArgs(new CloseReason(), false));
+            }
+        }
     }
 }
