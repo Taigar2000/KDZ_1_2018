@@ -34,7 +34,7 @@ namespace KDZ_1
             try
             {
                 P p = new P((0 + this.xsize / 4 + space) * scale, (0 + this.xsize / 4 + space) * scale, (this.xsize / 2) * scale, "ulr", new Point((0 + this.xsize / 4 + this.xsize / 2 + space) * scale, (0 + this.xsize / 4 + space) * scale));
-                this.length = 1;
+                //this.length = 1;
                 Lines l = new Lines();
                 rec(graph, p, 0, l);
             }

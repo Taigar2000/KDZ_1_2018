@@ -37,7 +37,7 @@ namespace KDZ_1
             this.summ += this.step;
             try
             {
-                lock (_vlock) { this.pb.progressBar1.Value = Math.Min(pb.progressBar1.Maximum - 3, (int)(this.summ)); }
+                lock (_vlock) { this.pb.progressBar1.Value = Math.Min(this.pbm - 3, (int)(this.summ)); }
             }
             catch (System.InvalidOperationException ex)
             {

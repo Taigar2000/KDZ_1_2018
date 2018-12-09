@@ -242,17 +242,17 @@ namespace KDZ_1
             if (f) Init();
             try
             {
-            this.bmp = new Bitmap((int)((Frac.xsize + Frac.space * 2) * Frac.scale), (int)((Frac.ysize + Frac.space * 2) * Frac.scale));
-            //Frac.setpictureBoxsize(Width, Height);
-            Graphics graph = Graphics.FromImage(bmp);
-            //this.Draw(bmp);
-            Frac.pen = new Pen(Frac.startColor);
-            Frac.brush = new SolidBrush(Frac.startColor);
-            this.Enabled = false;
-            //this.TopMost = false;
-            this.pb.Show();
-            this.pb.TopMost = true;
-            ProgressBur();
+                this.bmp = new Bitmap((int)((Frac.xsize + Frac.space * 2) * Frac.scale), (int)((Frac.ysize + Frac.space * 2) * Frac.scale));
+                //Frac.setpictureBoxsize(Width, Height);
+                Graphics graph = Graphics.FromImage(bmp);
+                //this.Draw(bmp);
+                Frac.pen = new Pen(Frac.startColor);
+                Frac.brush = new SolidBrush(Frac.startColor);
+                this.Enabled = false;
+                //this.TopMost = false;
+                this.pb.Show();
+                this.pb.TopMost = true;
+                ProgressBur();
                 timer.Start();
                 Frac.pb.timer.Start();
                 System.Threading.Thread thr = new System.Threading.Thread(delegate() { Frac.Draw(graph); });
@@ -786,7 +786,7 @@ namespace KDZ_1
         private void textBox1_TextChanged()
         {
             float sc;
-            if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }
+            if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0.05 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); Init(false); return; }
             if (Frac == null) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;

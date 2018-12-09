@@ -46,7 +46,7 @@ namespace KDZ_1
         public Colorarr colorarr;
         protected int colorarrmax;
         protected float colorarriter = 0, colorarrstep;
-        public float length;
+        //public float length;
         public Color startColor;
         public Color endColor;
         public int level_of_rec;
@@ -59,7 +59,7 @@ namespace KDZ_1
         public System.Drawing.Pen pen;
         public System.Drawing.Brush brush;
         public Fractal() {
-            this.length = 100;
+            //this.length = 100;
             this.startColor = Color.White;
             this.endColor = Color.White;
             this.level_of_rec = 0;
@@ -112,7 +112,7 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length) : this()
         {
-            this.length = length;
+            //this.length = length;
             this.max_level_of_rec = mlor;
         }
         public Fractal(int mlor, Color sc, Color ec) : this()
@@ -123,14 +123,14 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length, Color sc, Color ec) : this()
         {
-            this.length = length;
+            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;
         }
         public Fractal(int mlor, float length, Color sc, Color ec, float xs, float ys) : this()
         {
-            this.length = length;
+            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;
@@ -139,7 +139,7 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length, Color sc, Color ec, float xs, float ys, float size) : this()
         {
-            this.length = length;
+            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;
