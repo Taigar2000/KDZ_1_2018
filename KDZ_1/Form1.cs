@@ -32,13 +32,13 @@ namespace KDZ_1
         ProgressBur pb;
         Timer timer = new Timer();
         bool fenableformwhendrawing = false;
+        bool flagmb = false;
 
-        //public Form1() : base()
-        //{
-        //    DoubleBuffered = true;
-        //    //Init();
-        //}
 
+        /// <summary>
+        /// Конструктор принимающий ссылку на окно шкалы прогресса
+        /// </summary>
+        /// <param name="pb">Ссылка на окно шкалы прогресса</param>
         internal Form1(ProgressBur pb)
         {
             this.pb = pb;
@@ -59,11 +59,6 @@ namespace KDZ_1
             timer.Tick += new EventHandler(timer_Tick);
             
         }
-
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-
-        //}
 
         /// <summary>
         /// Выбор фрактала
@@ -141,12 +136,6 @@ namespace KDZ_1
             //InitializeComponent();
         }
 
-        //private void pictureBox_fractal_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        
         /// <summary>
         /// Отрисовка фрактала
         /// </summary>
@@ -154,6 +143,7 @@ namespace KDZ_1
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.Frac == null) { DropExWindow("Выберите тип фрактала"); return; }
             if (this.Frac.isdrawing) return;
             //this.Draw();
             DrawFractal();
@@ -250,13 +240,25 @@ namespace KDZ_1
                 return;
             }
             textBox1_TextChanged();
+            draw_step_by_step = checkBox_buffer.Checked;
             if (f) Init();
             try
             {
+                this.checkBox1.Enabled = false;
+                this.comboBox_type_of_fractal.Enabled = false;
+                this.SetStartColor.Enabled = false;
+                this.SetEndColor.Enabled = false;
+                this.textBox_max_depth_of_rec.Enabled = false;
+                this.textBox_dspace.Enabled = false;
+                this.button1.Enabled = false;
+                this.textBox1.Enabled = false;
+                this.button2.Enabled = false;
+                this.toolStripMenuItem1.Enabled = false;
                 this.bmp = new Bitmap((int)((Frac.xsize + Frac.space * 2) * Frac.scale), (int)((Frac.ysize + Frac.space * 2) * Frac.scale));
                 //Frac.setpictureBoxsize(Width, Height);
                 Graphics graph = Graphics.FromImage(bmp);
                 //this.Draw(bmp);
+                Frac.drawall = checkBox1.Checked;
                 Frac.pen = new Pen(Frac.startColor);
                 Frac.brush = new SolidBrush(Frac.startColor);
                 this.Enabled = false || fenableformwhendrawing;
@@ -395,39 +397,6 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox_dspace_TextChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_start_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_end_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
         /// Отцентровать изображение и сбросить масштаб
         /// </summary>
         /// <param name="sender"></param>
@@ -506,12 +475,6 @@ namespace KDZ_1
             }
             //Text = "" + (e.KeyValue);
         }
-
-        /*private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
-        {
-            DoubleBuffered = checkBox_buffer.Checked;
-            Text = DoubleBuffered?"True":"False";
-        }*/
 
         /// <summary>
         /// Выбор начального цвета фрактала
@@ -611,7 +574,7 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Масштабирование изображения
+        /// Масштабирование изображения с помощью колёсика мыши
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -623,10 +586,8 @@ namespace KDZ_1
             if (Frac.isdrawing) return;
             if (e.Delta > 0)
             {
-
                 ZoomUp(e);
                 //Text = "Вверх";
-                
             }
             else
             {
@@ -721,7 +682,7 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Сохранение изображения
+        /// Сохранение изображения как (старый интерфейс)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -755,7 +716,7 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Сохранение изображения
+        /// Сохранение изображения как (новый интерфейс)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -805,8 +766,6 @@ namespace KDZ_1
             (new Form1(pb)).ShowDialog(new Form1(pb));
         }
         
-        bool flagmb = false;
-
         /// <summary>
         /// Сколько уровней рекурсии отрисовывать
         /// </summary>
@@ -814,9 +773,67 @@ namespace KDZ_1
         /// <param name="e"></param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.Frac.isdrawing) return;
-            if (Frac != null) Frac.drawall = checkBox1.Checked;
+            if (Frac != null && !this.Frac.isdrawing) Frac.drawall = checkBox1.Checked;
+            //if (this.Frac.isdrawing) return;
         }
+
+        #region Old features
+        
+        //public Form1() : base()
+        //{
+        //    DoubleBuffered = true;
+        //    //Init();
+        //}
+
+        //private void label1_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void pictureBox_fractal_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox_dspace_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_start_color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_end_color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+        
+        /*private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
+        {
+            DoubleBuffered = checkBox_buffer.Checked;
+            Text = DoubleBuffered?"True":"False";
+        }*/
 
         /// <summary>
         /// Изменение масштаба через поле для ввода
@@ -841,6 +858,8 @@ namespace KDZ_1
         //    //Rewrite();
         //    //Invalidate();
         //}
+
+        #endregion
 
         /// <summary>
         /// Изменение масштаба через поле для ввода
@@ -914,13 +933,12 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Отрисовывать все уровни?
+        /// Отрисовывать все уровни постепенно?
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.Frac.isdrawing) return;
             draw_step_by_step = checkBox_buffer.Checked;
         }
 
@@ -938,6 +956,16 @@ namespace KDZ_1
             this.TopMost = overAllWindowsToolStripMenuItem.Checked;
             timer.Stop();
             Frac.pb.timer.Stop();
+            this.checkBox1.Enabled = true;
+            this.comboBox_type_of_fractal.Enabled = true;
+            this.SetStartColor.Enabled = true;
+            this.SetEndColor.Enabled = true;
+            this.textBox_max_depth_of_rec.Enabled = true;
+            this.textBox_dspace.Enabled = true;
+            this.button1.Enabled = true;
+            this.textBox1.Enabled = true;
+            this.button2.Enabled = true;
+            this.toolStripMenuItem1.Enabled = true;
         }
 
         /// <summary>
@@ -952,7 +980,7 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Стартовые значения позиции и размера
+        /// Стартовые значения позиции и размера и перерисование фрактала
         /// </summary>
         private void Init()
         {
@@ -972,7 +1000,7 @@ namespace KDZ_1
         }
 
         /// <summary>
-        /// Стартовые значения позиции и размера
+        /// Стартовые значения позиции и размера и если draw, то перерисование фрактала
         /// </summary>
         /// <param name="draw">Перерисовать фрактал?Да:Нет</param>
         private void Init(bool draw)

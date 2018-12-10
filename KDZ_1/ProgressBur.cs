@@ -40,6 +40,11 @@ namespace KDZ_1
             init();
         }
         //private Bitmap bmp = null;
+        
+        /// <summary>
+        /// Конструктор устанавливающий ссылку на фрактал
+        /// </summary>
+        /// <param name="f">Ссылка на фрактал</param>
         public ProgressBur(Object f)
         {
             this.Closed += ProgressBurClosed;
@@ -54,6 +59,9 @@ namespace KDZ_1
             timer.Tick += new EventHandler(Draw);
         }
 
+        /// <summary>
+        /// Инициализация шкалы прогресса
+        /// </summary>
         public void init()
         {
             this.progressBar1.Minimum = 0;
@@ -61,6 +69,11 @@ namespace KDZ_1
             //this.progressBar1.Step = 1;
         }
         
+        /// <summary>
+        /// Обновление шкалы прогресса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Draw(object sender, EventArgs e)
         {
             //init();
@@ -80,12 +93,21 @@ namespace KDZ_1
             Invalidate();
         }
 
+        /// <summary>
+        /// Переопределение метода закрытия окна шкалы прогресса, для отключения возможности его закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ProgressBurClosed(object sender, EventArgs e)
         {
             //Do nothing
             return;
         }
 
+        /// <summary>
+        /// Отлов события Закрытие окна шкалы прогресса и прекращение отрисовки или выход из программы
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!isexit)

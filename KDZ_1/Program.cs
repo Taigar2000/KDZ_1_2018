@@ -37,7 +37,9 @@ namespace KDZ_1
         [STAThread]
         static void Main()
         {
+            //for developer only
             bool debug = false;
+            //Заставляем всех использовать английскую локаль
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             while (true)
             {
