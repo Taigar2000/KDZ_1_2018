@@ -53,7 +53,7 @@ namespace KDZ_1
             this.colorDialog1.FullOpen = true;
             this.colorDialog1.Color = Color.White;
             this.Closed += Form1Closed;
-            this.TopMost = true;
+            this.TopMost = overAllWindowsToolStripMenuItem.Checked;//true;
             //Draw();
             timer.Interval = 10; //интервал между срабатываниями 10 миллисекунд
             timer.Tick += new EventHandler(timer_Tick);
@@ -260,7 +260,7 @@ namespace KDZ_1
                 Frac.pen = new Pen(Frac.startColor);
                 Frac.brush = new SolidBrush(Frac.startColor);
                 this.Enabled = false || fenableformwhendrawing;
-                //this.TopMost = false;
+                this.TopMost = false;
                 this.pb.Show();
                 this.pb.TopMost = true;
                 ProgressBur();
@@ -706,6 +706,14 @@ namespace KDZ_1
             {
                 DropExWindow("Невозможно сохранить несуществующий оъект\n" + ex.Message);
             }
+            catch (ArgumentNullException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
+            }
+            catch (System.Runtime.InteropServices.ExternalException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
+            }
             catch (Exception ex)
             {
                 DropExWindow("" + ex.Message);
@@ -731,6 +739,14 @@ namespace KDZ_1
             catch (NullReferenceException ex)
             {
                 DropExWindow("Невозможно сохранить несуществующий оъект\n" + ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
+            }
+            catch (System.Runtime.InteropServices.ExternalException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
             }
             catch (Exception ex)
             {
@@ -759,6 +775,18 @@ namespace KDZ_1
             catch (NullReferenceException ex)
             {
                 DropExWindow("Невозможно сохранить несуществующий оъект\n" + ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
+            }
+            catch (System.Runtime.InteropServices.ExternalException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                DropExWindow("Невозможно сохранить оъект\n" + ex.Message);
             }
             catch (Exception ex)
             {
@@ -900,16 +928,27 @@ namespace KDZ_1
         /// Конец отрисовки фрактала
         /// </summary>
         void end_of_Draw_Fractal() {
-            this.Activate();
+            //this.Activate();
             this.Enabled = true;
             Frac.isdrawing = false;
             this.pb.Hide();
             this.pb.TopMost = false;
             this.Frac.pb.Hide();
             this.Frac.pb.TopMost = false;
-            this.TopMost = true;
+            this.TopMost = overAllWindowsToolStripMenuItem.Checked;
             timer.Stop();
             Frac.pb.timer.Stop();
+        }
+
+        /// <summary>
+        /// Изменение выбранности пункта меню Поверх остальных окон и статуса Поверх остальных окон основного окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void overAllWindowsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            overAllWindowsToolStripMenuItem.Checked ^= true;
+            TopMost = overAllWindowsToolStripMenuItem.Checked;
         }
 
         /// <summary>

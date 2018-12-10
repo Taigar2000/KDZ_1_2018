@@ -13,18 +13,33 @@ namespace KDZ_1
 {
     public partial class ProgressBur : Form
     {
+        /// <summary>
+        /// ссылка на фрактал, для получения информации об отрисовке фрактала
+        /// </summary>
         private Fractal frac;
+        /// <summary>
+        /// bool переменная, обозначающая нужно ли завершать выполнение
+        /// </summary>
         public bool isexit = false;
+        /// <summary>
+        /// таймер для обновления шкалы прогресса отрисовки фрактала
+        /// </summary>
         public Timer timer = new Timer();
+        /// <summary>
+        /// Шкала прогресса
+        /// </summary>
+        public System.Windows.Forms.ProgressBar progressBar1 = new System.Windows.Forms.ProgressBar();
 
-
+        /// <summary>
+        /// Получение ссылки на фрактал
+        /// </summary>
+        /// <param name="f"></param>
         public void gfrac(object f)
         {
             this.frac = (Fractal)f;
             init();
         }
         //private Bitmap bmp = null;
-        public System.Windows.Forms.ProgressBar progressBar1 = new System.Windows.Forms.ProgressBar();
         public ProgressBur(Object f)
         {
             this.Closed += ProgressBurClosed;
