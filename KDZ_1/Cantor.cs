@@ -17,11 +17,23 @@ namespace KDZ_1
             this.sizey = wigth;
             this.dsizey = dwigth;
         }
+
+        /// <summary>
+        /// Задать dsizey
+        /// </summary>
+        /// <param name="f">Значение передаваемое dsizey</param>
         public override void set_float(float f)
         {
             this.dsizey = f;
             
         }
+
+        /// <summary>
+        /// До какого уровня рекурсии длина элемента множества Кантора будет >= 1
+        /// </summary>
+        /// <param name="mlor">Максимальный уровень рекурсии</param>
+        /// <param name="s">Начальная длина элемента множества Кантора</param>
+        /// <returns></returns>
         public int count_len(int mlor, float s)
         {
             int counter = 0;
@@ -29,8 +41,13 @@ namespace KDZ_1
                 s /= 3;
                 counter++;
             }
-            return Math.Min(counter+2, max_level_of_rec);
+            return Math.Min(counter+2, mlor);
         }
+
+        /// <summary>
+        /// Инициализация отрисовки фрактала
+        /// </summary>
+        /// <param name="graph">Куда отрисовывать</param>
         public override void Draw(System.Drawing.Graphics graph)
         {
             int mlor = count_len(max_level_of_rec, size * scale);
@@ -75,6 +92,14 @@ namespace KDZ_1
             }
         }
 
+        /// <summary>
+        /// Рекурсивное вычисление и отрисовка фрактала
+        /// </summary>
+        /// <param name="g">Куда отрисовывать</param>
+        /// <param name="x">Координата x верхнего левого угла</param>
+        /// <param name="y">Координата y верхнего левого угла</param>
+        /// <param name="w">Длинна элемента</param>
+        /// <param name="lor">Текущий уровень рекурсии</param>
         void rec(System.Drawing.Graphics g, float x, float y, float w, float lor)
         {
             if (!isdrawing) return;
@@ -120,6 +145,7 @@ namespace KDZ_1
                 Fractal.handle.Set();
             }
         }
+
     }
 
 }

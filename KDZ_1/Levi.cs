@@ -9,6 +9,11 @@ namespace KDZ_1
     class Levi : Fractal
     {
         //protected Line[] l;
+        
+        /// <summary>
+        /// Инициализация отрисовки фрактала
+        /// </summary>
+        /// <param name="graph">Куда отрисовывать</param>
         public override void Draw(System.Drawing.Graphics graph)
         {
             graph.FillRectangle(System.Drawing.Brushes.White, 0, 0, (xsize * 8 / 8 + space * 2)*scale, (ysize + space * 2)*scale);
@@ -31,6 +36,15 @@ namespace KDZ_1
             }
         }
 
+        /// <summary>
+        /// Рекурсивное вычисление и отрисовка фрактала
+        /// </summary>
+        /// <param name="g">Куда отрисовывать</param>
+        /// <param name="xs">Координата x начальной точки</param>
+        /// <param name="ys">Координата y начальной точки</param>
+        /// <param name="xe">Координата x конечной точки</param>
+        /// <param name="ye">Координата y конечной точки</param>
+        /// <param name="lor">Текущий уровень рекурсии</param>
         void rec(System.Drawing.Graphics g, float xs, float ys, float xe, float ye, float lor)
         {
             if (!isdrawing) return;

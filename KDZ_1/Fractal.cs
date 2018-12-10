@@ -43,18 +43,18 @@ namespace KDZ_1
         public ProgressBur pb;
         public int pbm;
         public bool scf = false, ecf = false;
-        public Colorarr colorarr;
+        protected Colorarr colorarr;
         protected int colorarrmax;
         protected float colorarriter = 0, colorarrstep;
         //public float length;
         public Color startColor;
         public Color endColor;
-        public int level_of_rec;
+        protected int level_of_rec;
         public int max_level_of_rec;
         public float space, xspace, yspace; //Rasstojanie do granitsi okna
         public float size, xsize, ysize; //Size of fractal
         public float xleft, yleft; //Left Upper point
-        public float pictureBoxXsize, pictureBoxYsize; //Size of window
+        protected float pictureBoxXsize, pictureBoxYsize; //Size of window
         public string message = "";
         public System.Drawing.Pen pen;
         public System.Drawing.Brush brush;
@@ -70,6 +70,13 @@ namespace KDZ_1
             yspace = 0;
             xsize = ysize = 300;
         }
+
+        /// <summary>
+        /// Быстрое возведение в степень
+        /// </summary>
+        /// <param name="x">Число возводимое в степень</param>
+        /// <param name="step">Степень</param>
+        /// <returns></returns>
         public int binpow(int x, int step)
         {
             if (step == 0) return 1;
@@ -92,20 +99,40 @@ namespace KDZ_1
                 return x * a;
             }
         }
+
+        /// <summary>
+        /// Деление числа
+        /// </summary>
+        /// <param name="max">Делимое</param>
+        /// <param name="x">Делитель</param>
+        /// <param name="step">Количество делений Делимого на делитель ( max/(x*x*x*x) для step = 4)</param>
+        /// <returns></returns>
         public float bindrob(float max, int x, int step)
         {
             if (step == 1) return (float)(1.0 * max) / x;
             return bindrob((float)(max) / x, x, step - 1);
         }
+
+        /// <summary>
+        /// Установить новые размеры окна для фрактала
+        /// </summary>
+        /// <param name="x">Новая ширина окна</param>
+        /// <param name="y">Новая высота окна</param>
         public void setpictureBoxsize(float x, float y)
         {
             this.pictureBoxXsize = x;
             this.pictureBoxYsize = y;
         }
+
+        /// <summary>
+        /// Функция для возможности установки значения в protected поле
+        /// </summary>
+        /// <param name="f"></param>
         public virtual void set_float(float f)
         {
 
         }
+
         public Fractal(int mlor) : this()
         {
             this.max_level_of_rec = mlor;

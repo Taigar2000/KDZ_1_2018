@@ -37,6 +37,7 @@ namespace KDZ_1
         [STAThread]
         static void Main()
         {
+            bool debug = false;
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             while (true)
             {
@@ -47,14 +48,18 @@ namespace KDZ_1
                     //Application.Run(new Form1());
                     ProgressBur pb = new ProgressBur(new Fractal());
                     Application.Run(new MultiFormContext(new Form1(pb), pb));
+                    break;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Произошла непредвиденная ошибка\n" + ex.Message + '\n' + ex.Source + '\n' + ex.StackTrace + '\n' + ex.ToString());
-                    Console.WriteLine("\nДля выхода из программы нажмите ESC\n Для перезапуска программы - клавишу Enter");
-                    if (Console.ReadKey(true).Key != ConsoleKey.Escape) continue;
+                    if (debug) // For developers only
+                    {
+                        Console.WriteLine("Произошла непредвиденная ошибка\n" + ex.Message + '\n' + ex.Source + '\n' + ex.StackTrace + '\n' + ex.ToString());
+                        Console.WriteLine("\nДля выхода из программы нажмите ESC\n Для перезапуска программы - клавишу Enter");
+                        if (Console.ReadKey(true).Key != ConsoleKey.Escape) continue;
+                    }
                 }
-                break;
+                if(debug) break;
             }
         }
     }

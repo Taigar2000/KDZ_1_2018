@@ -20,8 +20,13 @@ namespace KDZ_1
                 max_length2 = max_length;
             }
         }
-        public char f = 'g';
+        //public char f = 'g';
         //protected Line[] l;
+
+        /// <summary>
+        /// Инициализация отрисовки фрактала
+        /// </summary>
+        /// <param name="graph">Куда отрисовывать</param>
         public override void Draw(System.Drawing.Graphics graph)
         {
             graph.FillRectangle(System.Drawing.Brushes.White, 0, 0, (xsize + space * 2) * scale, (ysize + space * 2) * scale);
@@ -49,7 +54,18 @@ namespace KDZ_1
             public Point p1, p2, p3, p4, p5;
             public float w=0;
             public string direct="nnn";
+            /// <summary>
+            /// Конструктор без параметров
+            /// </summary>
             public P() { }
+            /// <summary>
+            /// Конструктор
+            /// </summary>
+            /// <param name="x">Координата x начальной точки</param>
+            /// <param name="y">Координата y начальной точки</param>
+            /// <param name="w">Расстояние между точками</param>
+            /// <param name="direct">Направление элемента</param>
+            /// <param name="o">Следующая точка</param>
             public P(float x, float y, float w, string direct, Point o)
             {
                 this.p5 = o;
@@ -101,6 +117,11 @@ namespace KDZ_1
                 }
             }
 
+            /// <summary>
+            /// Нарисовать линии (p1,p2), (p2,p3), (p3,p4)
+            /// </summary>
+            /// <param name="g">Куда рисовать</param>
+            /// <param name="pen">Чем рисовать</param>
             public void Drow(System.Drawing.Graphics g, System.Drawing.Pen pen)
             {
                 g.DrawLine(pen, p1.x, p1.y, p2.x, p2.y);
@@ -113,7 +134,18 @@ namespace KDZ_1
         class Line {
             public float x1, y1, x2, y2;
             public char dir = ' ';
+            /// <summary>
+            /// Конструктор без параметров
+            /// </summary>
             public Line() { }
+            /// <summary>
+            /// Конструктор
+            /// </summary>
+            /// <param name="x1">Координата x начальной точки</param>
+            /// <param name="y1">Координата y начальной точки</param>
+            /// <param name="x2">Координата x конечной точки</param>
+            /// <param name="y2">Координата y конечной точки</param>
+            /// <param name="dir"></param>
             public Line(float x1, float y1, float x2, float y2, char dir)
             {
                 this.x1 = x1;
@@ -127,10 +159,17 @@ namespace KDZ_1
         class Lines
         {
             public List<Line> l;
+            /// <summary>
+            /// Конструктор без параметров: создаёт пустой массив линий l
+            /// </summary>
             public Lines()
             {
                 l = new List<Line>();
             }
+            /// <summary>
+            /// Конструктор: принимает массив line и строит по нему массив l
+            /// </summary>
+            /// <param name="line">Массив линий - соединителей</param>
             public Lines(List<Line> line)
             {
                 //l = line;
@@ -162,6 +201,13 @@ namespace KDZ_1
 
         }
 
+        /// <summary>
+        /// Рекурсивное вычисление и отрисовка фрактала
+        /// </summary>
+        /// <param name="g">Куда отрисовывать</param>
+        /// <param name="p">Точки для отрисовки следующего шага</param>
+        /// <param name="lor">Текущий уровень рекурсии</param>
+        /// <param name="l">Массив линий</param>
         void rec(System.Drawing.Graphics g, P p, float lor, Lines l)
         {
             if (!isdrawing) return;
