@@ -232,7 +232,7 @@ namespace KDZ_1
                 DropExWindow(message);
                 return;
             }
-            if (this.textBox_max_depth_of_rec.TextLength == 0 || !int.TryParse(this.textBox_max_depth_of_rec.Text, out Frac.max_level_of_rec) || Frac.max_level_of_rec < 0 /*|| Frac.max_level_of_rec > 1000*/)
+            if (this.textBox_max_depth_of_rec.TextLength == 0 || !int.TryParse(this.textBox_max_depth_of_rec.Text, out Frac.max_level_of_rec) || Frac.max_level_of_rec <= 0 /*|| Frac.max_level_of_rec > 1000*/)
             {
                 //Вывод окна с сообщением об ошибке
                 this.message = "Некорректный формат глубины рекурсии";
@@ -762,7 +762,7 @@ namespace KDZ_1
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.Frac.isdrawing) return;
+            if (this.Frac!=null && this.Frac.isdrawing) return;
             (new Form1(pb)).ShowDialog(new Form1(pb));
         }
         
@@ -777,90 +777,6 @@ namespace KDZ_1
             //if (this.Frac.isdrawing) return;
         }
 
-        #region Old features
-        
-        //public Form1() : base()
-        //{
-        //    DoubleBuffered = true;
-        //    //Init();
-        //}
-
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void pictureBox_fractal_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox_dspace_TextChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_start_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_end_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-        
-        /*private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
-        {
-            DoubleBuffered = checkBox_buffer.Checked;
-            Text = DoubleBuffered?"True":"False";
-        }*/
-
-        /// <summary>
-        /// Изменение масштаба через поле для ввода
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void textBox1_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (this.Frac.isdrawing) return;
-        //    float sc;
-        //    if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }
-        //    if (Frac == null) return;
-        //    Frac.xspace = this.pictureBox1.Width;
-        //    Frac.yspace = 22;
-        //    //posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
-        //    //posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
-        //    Frac.xleft = posx;
-        //    Frac.yleft = posy;
-        //    Frac.scale = sc;
-        //    if (!Frac.scf || !Frac.ecf) return;
-        //    //DrawFractal();
-        //    //Rewrite();
-        //    //Invalidate();
-        //}
-
-        #endregion
-
         /// <summary>
         /// Изменение масштаба через поле для ввода
         /// </summary>
@@ -868,7 +784,7 @@ namespace KDZ_1
         /// <param name="e"></param>
         private void textBox1_TextChanged()
         {
-            if (this.Frac.isdrawing) return;
+            //if (this.Frac.isdrawing) return;
             float sc;
             if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0.05 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); Init(false); return; }
             if (Frac == null) return;
@@ -966,6 +882,7 @@ namespace KDZ_1
             this.textBox1.Enabled = true;
             this.button2.Enabled = true;
             this.toolStripMenuItem1.Enabled = true;
+            Invalidate();
         }
 
         /// <summary>
@@ -1043,6 +960,90 @@ namespace KDZ_1
             Dispose();
             Application.Exit();
         }
+
+        #region Old features
+        
+        //public Form1() : base()
+        //{
+        //    DoubleBuffered = true;
+        //    //Init();
+        //}
+
+        //private void label1_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void pictureBox_fractal_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox_dspace_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_start_color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+
+        /// <summary>
+        /// Not using method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_end_color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+
+        }
+        
+        /*private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
+        {
+            DoubleBuffered = checkBox_buffer.Checked;
+            Text = DoubleBuffered?"True":"False";
+        }*/
+
+        /// <summary>
+        /// Изменение масштаба через поле для ввода
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //private void textBox1_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (this.Frac.isdrawing) return;
+        //    float sc;
+        //    if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }
+        //    if (Frac == null) return;
+        //    Frac.xspace = this.pictureBox1.Width;
+        //    Frac.yspace = 22;
+        //    //posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
+        //    //posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
+        //    Frac.xleft = posx;
+        //    Frac.yleft = posy;
+        //    Frac.scale = sc;
+        //    if (!Frac.scf || !Frac.ecf) return;
+        //    //DrawFractal();
+        //    //Rewrite();
+        //    //Invalidate();
+        //}
+
+        #endregion
         
     }
 

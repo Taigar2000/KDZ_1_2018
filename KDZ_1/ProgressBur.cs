@@ -11,6 +11,9 @@ using KDZ_1;
 
 namespace KDZ_1
 {
+    /// <summary>
+    /// Класс для вывода шкалы прогресса построения фрактала
+    /// </summary>
     public partial class ProgressBur : Form
     {
         /// <summary>

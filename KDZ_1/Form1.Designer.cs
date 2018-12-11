@@ -54,13 +54,13 @@
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overAllWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.overAllWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -291,7 +291,7 @@
             this.saveAsToolStripMenuItem,
             this.saveToolStripMenuItem1});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem2.Text = "Save";
             // 
             // saveToolStripMenuItem
@@ -319,14 +319,36 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(95, 6);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(95, 6);
+            // 
+            // windowToolStripMenuItem
+            // 
+            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.overAllWindowsToolStripMenuItem});
+            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.windowToolStripMenuItem.Text = "Window";
+            // 
+            // overAllWindowsToolStripMenuItem
+            // 
+            this.overAllWindowsToolStripMenuItem.Checked = true;
+            this.overAllWindowsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.overAllWindowsToolStripMenuItem.Name = "overAllWindowsToolStripMenuItem";
+            this.overAllWindowsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.overAllWindowsToolStripMenuItem.Text = "Over all windows";
+            this.overAllWindowsToolStripMenuItem.Click += new System.EventHandler(this.overAllWindowsToolStripMenuItem_Click);
             // 
             // checkBox1
             // 
@@ -366,28 +388,6 @@
             this.textBox1.TabIndex = 20;
             this.textBox1.Text = "1";
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
-            // 
-            // windowToolStripMenuItem
-            // 
-            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.overAllWindowsToolStripMenuItem});
-            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.windowToolStripMenuItem.Text = "Window";
-            // 
-            // overAllWindowsToolStripMenuItem
-            // 
-            this.overAllWindowsToolStripMenuItem.Checked = true;
-            this.overAllWindowsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.overAllWindowsToolStripMenuItem.Name = "overAllWindowsToolStripMenuItem";
-            this.overAllWindowsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.overAllWindowsToolStripMenuItem.Text = "Over all windows";
-            this.overAllWindowsToolStripMenuItem.Click += new System.EventHandler(this.overAllWindowsToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,7 +418,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(286, 501);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Приложение для построения фракталов";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_fractal_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_fractal_MouseMove);
