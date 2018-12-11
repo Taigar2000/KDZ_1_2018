@@ -158,7 +158,6 @@
             this.comboBox_start_color.Size = new System.Drawing.Size(236, 21);
             this.comboBox_start_color.TabIndex = 5;
             this.comboBox_start_color.Visible = false;
-            this.comboBox_start_color.SelectedIndexChanged += new System.EventHandler(this.comboBox_start_color_SelectedIndexChanged);
             // 
             // comboBox_end_color
             // 
@@ -172,7 +171,6 @@
             this.comboBox_end_color.Size = new System.Drawing.Size(236, 21);
             this.comboBox_end_color.TabIndex = 7;
             this.comboBox_end_color.Visible = false;
-            this.comboBox_end_color.SelectedIndexChanged += new System.EventHandler(this.comboBox_end_color_SelectedIndexChanged);
             // 
             // checkBox_buffer
             // 
@@ -196,7 +194,6 @@
             this.textBox_dspace.Size = new System.Drawing.Size(236, 20);
             this.textBox_dspace.TabIndex = 10;
             this.textBox_dspace.Visible = false;
-            this.textBox_dspace.TextChanged += new System.EventHandler(this.textBox_dspace_TextChanged);
             // 
             // label_dspace
             // 

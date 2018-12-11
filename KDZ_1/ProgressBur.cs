@@ -42,7 +42,6 @@ namespace KDZ_1
             this.frac = (Fractal)f;
             init();
         }
-        //private Bitmap bmp = null;
         
         /// <summary>
         /// Конструктор устанавливающий ссылку на фрактал
@@ -54,9 +53,7 @@ namespace KDZ_1
             frac = (Fractal)f;
             InitializeComponent();
             init();
-            //this.TopMost = true;
             this.Hide();
-            //this.Enabled = false;
             this.Visible = false;
             timer.Interval = 10; //интервал между срабатываниями 10 миллисекунд
             timer.Tick += new EventHandler(Draw);
@@ -69,7 +66,6 @@ namespace KDZ_1
         {
             this.progressBar1.Minimum = 0;
             this.progressBar1.Maximum = frac.max_length;
-            //this.progressBar1.Step = 1;
         }
         
         /// <summary>
@@ -79,19 +75,6 @@ namespace KDZ_1
         /// <param name="e"></param>
         public void Draw(object sender, EventArgs e)
         {
-            //init();
-            //this.Activate();
-            //this.Show();
-            //this.TopMost = true;
-            //this.TopMost = true;
-            //while (frac.isdrawing)
-            //{
-            //if (!frac.isdrawing) break;
-            //this.progressBar1.Value = frac.pb.progressBar1.Value;
-            //Invalidate();
-            //}
-            //this.Hide();
-            //this.TopMost = false;
             this.Enabled = true;
             Invalidate();
         }
@@ -103,7 +86,7 @@ namespace KDZ_1
         /// <param name="e"></param>
         void ProgressBurClosed(object sender, EventArgs e)
         {
-            //Do nothing
+            //Do nothing (sovsem nothing)
             return;
         }
 
@@ -118,7 +101,6 @@ namespace KDZ_1
                 frac.isdrawing=false;
                 e.Cancel = true;
             }
-            //Hide();
         }
 
         /// <summary>

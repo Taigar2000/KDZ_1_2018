@@ -32,10 +32,6 @@ namespace KDZ_1
         {
             return new ColorRGB(c);
         }
-
-
-        // Given H,S,L in range of 0-1
-        // Returns a Color (RGB struct) in range of 0-255
         public static ColorRGB HSL2RGB(double h, double sl, double l)
         {
             double v;
@@ -43,7 +39,7 @@ namespace KDZ_1
             h = Math.Min(h, 1);
             sl = Math.Min(sl, 1);
             l = Math.Min(l, 1);
-            r = l;   // default to gray
+            r = l;   
             g = l;
             b = l;
             v = (l <= 0.5) ? (l * (1.0 + sl)) : (l + sl - l * sl);
@@ -102,9 +98,7 @@ namespace KDZ_1
             rgb.B = Convert.ToByte(Math.Max(0, b) * 255.0f);
             return rgb;
         }
-
-        // Given a Color (RGB Struct) in range of 0-255
-        // Return H,S,L in range of 0-1
+        
         public static void RGB2HSL(ColorRGB rgb, out double h, out double s, out double l)
         {
             double r = rgb.R / 255.0;
@@ -115,7 +109,7 @@ namespace KDZ_1
             double vm;
             double r2, g2, b2;
 
-            h = 0; // default to black
+            h = 0;
             s = 0;
             l = 0;
             v = Math.Max(r, g);
@@ -158,36 +152,17 @@ namespace KDZ_1
 
     class Colorarr
     {
-        //public Color() { }
         public Color[] colorarr;
 
         public Colorarr(int len, Color start, Color end)
         {
             double hs, he, ss, se, ls, le;
-            //len -= 2;
             ColorRGB.RGB2HSL((ColorRGB)(start), out hs, out ss, out ls);
             ColorRGB.RGB2HSL((ColorRGB)(end), out he, out se, out le);
             double sh = (se - ss) / (Math.Max(len - 2, 1));
             double lh = (le - ls) / (Math.Max(len - 2, 1));
             double hh = (he - hs) / (Math.Max(len - 2, 1));
             bool rev = false;
-            //if (hh < 0)
-            //{
-            //    hh = (hh)*(0-1.0);
-            //    double h = hs;
-            //    hs = he;
-            //    he = h;
-            //    sh = (sh) * (0 - 1.0);
-            //    h = ss;
-            //    ss = se;
-            //    se = h;
-            //    lh = (lh) * (0 - 1.0);
-            //    h = ls;
-            //    ls = le;
-            //    le = h;
-            //    rev = true;
-            //}
-            //colorarr = new Color[] { Color.Red, Color.Green, Color.Blue };
             this.colorarr = new Color[0];
             int i = 0;
             for (double hi = hs, li = ls, si = ss; i < len; hi += hh, li += lh, si += sh )
@@ -201,17 +176,9 @@ namespace KDZ_1
                     this.colorarr[j] = ncolorarr[j];
                 }
                 this.colorarr[ncolorarr.GetLength(0)] = (Color)(c);
-                //do something with the color
             }
-            //if (rev) Array.Reverse(colorarr);
             this.colorarr[Math.Max(colorarr.GetLength(0)-2,0)] = end;
             colorarr[0] = start;
-            //Color[] ncolorarr2 = this.colorarr;
-            //this.colorarr = new Color[ncolorarr2.GetLength(0) + 1];
-            //for (int j = 0; j < ncolorarr2.GetLength(0); j++)
-            //{
-            //    this.colorarr[j] = ncolorarr2[j];
-            //}
             int vivod = 0;
         }
     }

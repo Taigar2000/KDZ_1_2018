@@ -17,11 +17,8 @@ namespace KDZ_1
         public override void Draw(System.Drawing.Graphics graph)
         {
             graph.FillRectangle(System.Drawing.Brushes.White, 0, 0, (xsize * 8 / 8 + space * 2)*scale, (ysize + space * 2)*scale);
-            //message = "" + pictureBoxXsize + "  " + pictureBoxYsize + "  " + (pictureBoxXsize - xsize + xspace) / 2 + "  " + (pictureBoxYsize - ysize + yspace) / 2 + "  " + (xsize + space * 2) + "  " + (ysize + space * 2);
-            //return;
             if (max_level_of_rec>0)
             {
-                //this.colorarrmax = (binpow(2, max_level_of_rec) < 0 ? int.MaxValue : binpow(2, max_level_of_rec));
                 this.colorarrmax = (max_level_of_rec+1);
                 this.colorarr = new Colorarr(colorarrmax, startColor, endColor);
                 this.colorarrstep = bindrob(colorarrmax, 2, max_level_of_rec);
@@ -58,11 +55,9 @@ namespace KDZ_1
 
             }
 
-            //this.pb.progressBar1.Value = Math.Min(pb.progressBar1.Maximum - 3, (int)(this.summ));
             level_of_rec = (int)lor;
             if (lor == max_level_of_rec)
             {
-                //message = "" + xs + " " + ys + " " + xe + " " + ye;
                 return;
             }
 
@@ -106,18 +101,6 @@ namespace KDZ_1
             else
             {
                 float xl = Math.Min(xs, xe), xr = Math.Max(xs, xe), yu = Math.Min(ys, ye), yd = Math.Max(ys, ye);
-                //if (ye < ys)
-                //{
-                //    rec(g, xl, yu, xr, yu, lor + 1);
-                //    rec(g, xl, yu, xl, yd, lor + 1);
-                //}
-                //else
-                //{
-                //    rec(g, xl, yd, xr, yd, lor + 1);
-                //    rec(g, xl, yu, xl, yd, lor + 1);
-                //}
-                //rec(g, xs, ye, xe, ye, lor + 1);
-                //rec(g, xs, yu, xs, yd, lor + 1);
                 if(xs < xe && ys > ye)
                 {
                     rec(g, xs, ys, xs, ye, lor + 1);
@@ -144,7 +127,6 @@ namespace KDZ_1
             if (max_level_of_rec > 0)
             {
                 this.pen.Color = this.colorarr.colorarr[(int)(lor)];
-                //colorarriter += colorarrstep;
             }
             g.DrawLine(this.pen, xs, ys, xe, ye);
 

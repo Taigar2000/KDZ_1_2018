@@ -20,8 +20,6 @@ namespace KDZ_1
                 {
                     form.FormClosed += (s, args) =>
                     {
-                        //When we have closed the last of the "starting" forms, 
-                        //end the program.
                         if (Interlocked.Decrement(ref openForms) == 0)
                             ExitThread();
                     };
@@ -47,7 +45,6 @@ namespace KDZ_1
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    //Application.Run(new Form1());
                     ProgressBur pb = new ProgressBur(new Fractal());
                     Application.Run(new MultiFormContext(new Form1(pb), pb));
                     break;

@@ -20,8 +20,6 @@ namespace KDZ_1
                 max_length2 = max_length;
             }
         }
-        //public char f = 'g';
-        //protected Line[] l;
 
         /// <summary>
         /// Инициализация отрисовки фрактала
@@ -39,7 +37,6 @@ namespace KDZ_1
             try
             {
                 P p = new P((0 + this.xsize / 4 + space) * scale, (0 + this.xsize / 4 + space) * scale, (this.xsize / 2) * scale, "ulr", new Point((0 + this.xsize / 4 + this.xsize / 2 + space) * scale, (0 + this.xsize / 4 + space) * scale));
-                //this.length = 1;
                 Lines l = new Lines();
                 rec(graph, p, 0, l);
             }
@@ -127,7 +124,6 @@ namespace KDZ_1
                 g.DrawLine(pen, p1.x, p1.y, p2.x, p2.y);
                 g.DrawLine(pen, p2.x, p2.y, p3.x, p3.y);
                 g.DrawLine(pen, p3.x, p3.y, p4.x, p4.y);
-                //g.DrawLine(pen, p4.x, p4.y, p5.x, p5.y);
             }
         }
 
@@ -172,7 +168,6 @@ namespace KDZ_1
             /// <param name="line">Массив линий - соединителей</param>
             public Lines(List<Line> line)
             {
-                //l = line;
                 l = new List<Line>();
                 foreach (Line li in line)
                 {
@@ -223,23 +218,16 @@ namespace KDZ_1
 
                 }
             }
-            //this.pb.progressBar1.Value = Math.Min(pb.progressBar1.Maximum-3, (int)(this.summ));
-            //System.Threading.Interlocked.Exchange(ref pb.progressBar1.Value, 1);
             level_of_rec = (int)lor;
-            //this.length = binpow(2,level_of_rec) + 1;
             if (lor == max_level_of_rec)
             {
-                //message = "" + xs + " " + ys + " " + xe + " " + ye;
                 return;
             }
 
             if (max_level_of_rec > 0)
             {
                 this.pen.Color = this.colorarr.colorarr[(int)(lor)];
-                //colorarriter += colorarrstep;
-                //g.DrawLine(this.pen, xs, ys, xe, ye);
             }
-            //Print figure
             p.Drow(g,pen);
             if (l.l.Count>0)
             {

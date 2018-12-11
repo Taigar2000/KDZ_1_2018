@@ -139,7 +139,6 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length) : this()
         {
-            //this.length = length;
             this.max_level_of_rec = mlor;
         }
         public Fractal(int mlor, Color sc, Color ec) : this()
@@ -150,14 +149,12 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length, Color sc, Color ec) : this()
         {
-            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;
         }
         public Fractal(int mlor, float length, Color sc, Color ec, float xs, float ys) : this()
         {
-            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;
@@ -166,7 +163,6 @@ namespace KDZ_1
         }
         public Fractal(int mlor, float length, Color sc, Color ec, float xs, float ys, float size) : this()
         {
-            //this.length = length;
             this.startColor = sc;
             this.endColor = ec;
             this.max_level_of_rec = mlor;

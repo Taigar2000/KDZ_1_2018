@@ -25,7 +25,6 @@ namespace KDZ_1
                 frac = value;
             }
         }
-        //private string Cantor_dspace = "";
         private string message = "";
         private Bitmap bmp = null;
         private bool draw_step_by_step = true;
@@ -53,8 +52,7 @@ namespace KDZ_1
             this.colorDialog1.FullOpen = true;
             this.colorDialog1.Color = Color.White;
             this.Closed += Form1Closed;
-            this.TopMost = overAllWindowsToolStripMenuItem.Checked;//true;
-            //Draw();
+            this.TopMost = overAllWindowsToolStripMenuItem.Checked;
             timer.Interval = 10; //интервал между срабатываниями 10 миллисекунд
             timer.Tick += new EventHandler(timer_Tick);
             
@@ -85,8 +83,6 @@ namespace KDZ_1
                     }
                     else
                         Init(false);
-                    //name = name.Length>0?name:"Cantor";
-                    //Init(false);
                     break;
                 case 1:
                     this.textBox_dspace.Visible = false;
@@ -104,8 +100,6 @@ namespace KDZ_1
                     }
                     else
                         Init(false);
-                    //name = name.Length > 0 ? name : "Levi";
-                    //Init(false);
                     break;
                 case 0:
                     this.textBox_dspace.Visible = false;
@@ -123,17 +117,13 @@ namespace KDZ_1
                     }
                     else
                         Init(false);
-                    //Init(false);
-                    //name = name.Length > 0 ? name : "Gilbert";
                     break;
                 case -1:
-                    //DropExWindow("Выберите тип фрактала");
                     return;
             }
             pb.gfrac(Frac);
             SetStartColor.Visible = true;
             SetEndColor.Visible = true;
-            //InitializeComponent();
         }
 
         /// <summary>
@@ -145,7 +135,6 @@ namespace KDZ_1
         {
             if (this.Frac == null) { DropExWindow("Выберите тип фрактала"); return; }
             if (this.Frac.isdrawing) return;
-            //this.Draw();
             DrawFractal();
         }
 
@@ -161,21 +150,17 @@ namespace KDZ_1
             {
                 f = true;
             }
-            //Frac = null;
             this.textBox_dspace.Visible = false;
             this.label_dspace.Visible = false;
             switch (this.comboBox_type_of_fractal.SelectedIndex)
             {
-                case 0:
-                    //Frac = new Gilbert();  
+                case 0: 
                     break;
                 case 1:
-                    //Frac = new Levi(); 
                     break;
                 case 2:
                     this.textBox_dspace.Visible = true;
                     this.label_dspace.Visible = true;
-                    //Frac = new Cantor();
                     int dspace;
                     if (this.textBox_dspace.TextLength == 0)
                     {
@@ -198,33 +183,13 @@ namespace KDZ_1
                 message = "Выберите тип фрактала";
                 DropExWindow(message);
                 return;
-            }
-            //switch (this.comboBox_start_color.SelectedIndex)
-            //{
-            //    case 0:
-            //        Frac.startColor = Color.Red; break;
-            //    case 1:
-            //        Frac.startColor = Color.Green; break;
-            //    case 2:
-            //        Frac.startColor = Color.Blue; break;
-            //}
-
-            if (!Frac.scf)
+            }if (!Frac.scf)
             {
                 //Вывод окна с сообщением об ошибке
                 message = "Выберите начальный цвет фрактала";
                 DropExWindow(message);
                 return;
             }
-            //switch (this.comboBox_end_color.SelectedIndex)
-            //{
-            //    case 0:
-            //        Frac.endColor = Color.Red; break;
-            //    case 1:
-            //        Frac.endColor = Color.Green; break;
-            //    case 2:
-            //        Frac.endColor = Color.Blue; break;
-            //}
             if (!Frac.ecf)
             {
                 //Вывод окна с сообщением об ошибке
@@ -255,9 +220,7 @@ namespace KDZ_1
                 this.button2.Enabled = false;
                 this.toolStripMenuItem1.Enabled = false;
                 this.bmp = new Bitmap((int)((Frac.xsize + Frac.space * 2) * Frac.scale), (int)((Frac.ysize + Frac.space * 2) * Frac.scale));
-                //Frac.setpictureBoxsize(Width, Height);
                 Graphics graph = Graphics.FromImage(bmp);
-                //this.Draw(bmp);
                 Frac.drawall = checkBox1.Checked;
                 Frac.pen = new Pen(Frac.startColor);
                 Frac.brush = new SolidBrush(Frac.startColor);
@@ -270,15 +233,12 @@ namespace KDZ_1
                 Frac.pb.timer.Start();
                 System.Threading.Thread thr = new System.Threading.Thread(delegate() { Frac.Draw(graph); });
                 thr.Start();
-                //Frac.Draw(graph);
                 if (Frac.message.Length > 0)
                 {
                     //Вывод окна с сообщением об ошибке
                     message = Frac.message;
-                    //Text = message;
                     DropExWindow(message);
                 }
-                //pictureBox_fractal.Image = bmp;
             }
             catch(NullReferenceException ex)
             {
@@ -300,12 +260,7 @@ namespace KDZ_1
             }
             finally
             {
-                //Frac.pb.Visible = false;
-                //this.Frac.pb.TopMost = true;
-                //Frac.pb.Enabled = false;
-                //this.TopMost = true;
             }
-            //Invalidate();
         }
 
         /// <summary>
@@ -392,7 +347,6 @@ namespace KDZ_1
                 posx += dx;
                 posy += dy;
                 Invalidate();
-                //pictureBox_fractal.Location = new System.Drawing.Point((int)(posx + dx), (int)(posy + dy));
             }
         }
 
@@ -467,13 +421,11 @@ namespace KDZ_1
                 if (this.Frac.isdrawing) return;
                 Rewrite();
             }
-            ////Only for developer
             if (e.KeyCode == Keys.L && this.textBox1.Text=="42" && this.textBox_max_depth_of_rec.Text=="42")
             {
                 fenableformwhendrawing ^= true;
                 DropExWindow("В чём заключается смысл Жизни: "+(fenableformwhendrawing?"42":"I dont know"));
             }
-            //Text = "" + (e.KeyValue);
         }
 
         /// <summary>
@@ -587,12 +539,10 @@ namespace KDZ_1
             if (e.Delta > 0)
             {
                 ZoomUp(e);
-                //Text = "Вверх";
             }
             else
             {
                 ZoomDown(e);
-                //Text = "Вниз";
             }
             this.label5.Text = $"Масштаб: ";
             if (Frac == null)
@@ -603,7 +553,6 @@ namespace KDZ_1
             {
                 this.textBox1.Text = $"{this.Frac.scale:f3}";
             }
-            //Text = "" + posx + "   " + posy;
             Rewrite();
         }
 
@@ -616,9 +565,7 @@ namespace KDZ_1
             try
             {
                 this.bmp = new Bitmap((int)(((Frac.xsize + Frac.space * 2) * Frac.scale)), (int)((Frac.ysize + Frac.space * 2) * Frac.scale));
-                //Frac.setpictureBoxsize((int)(Width*Frac.scale), (int)(Height*Frac.scale));
                 Graphics graph = Graphics.FromImage(bmp);
-                //Frac.Draw(graph);
                 DrawFractal();
             }
             catch (ArgumentNullException ex)
@@ -633,7 +580,6 @@ namespace KDZ_1
             }
             catch (OverflowException ex)
             {
-                //Text = "" + (posx + Frac.xspace) + " " + (posy + Frac.yspace) + " " + (Frac.scale);
                 //Вывод окна с сообщением об ошибке
                 DropExWindow("Слишком большая глубина рекурсии \n" + ex.Message);
             }
@@ -641,7 +587,6 @@ namespace KDZ_1
             {
                 DropExWindow("\n" + ex.Message);
             }
-            //Init();
             Invalidate();
         }
 
@@ -774,14 +719,11 @@ namespace KDZ_1
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (Frac != null && !this.Frac.isdrawing) Frac.drawall = checkBox1.Checked;
-            //if (this.Frac.isdrawing) return;
         }
 
         /// <summary>
         /// Изменение масштаба через поле для ввода
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void textBox1_TextChanged()
         {
             //if (this.Frac.isdrawing) return;
@@ -790,15 +732,10 @@ namespace KDZ_1
             if (Frac == null) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;
-            //posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
-            //posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
             Frac.xleft = posx;
             Frac.yleft = posy;
             Frac.scale = sc;
             if (!Frac.scf || !Frac.ecf) return;
-            //DrawFractal();
-            //Rewrite();
-            //Invalidate();
         }
 
         /// <summary>
@@ -818,8 +755,6 @@ namespace KDZ_1
         /// <summary>
         /// Новое окно ожидания
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ProgressBur()
         {
             Frac.isdrawing = true;
@@ -831,10 +766,6 @@ namespace KDZ_1
             Frac.pb = this.pb;
             Frac.pb.init();
             Frac.pb.gfrac(Frac);
-            //Frac.pb.Visible=true;
-            //System.Threading.Thread thr = new System.Threading.Thread(Frac.pb.Draw);
-            //Frac.pb.Draw();
-            //thr.Start();
         }
 
         /// <summary>
@@ -862,7 +793,6 @@ namespace KDZ_1
         /// Конец отрисовки фрактала
         /// </summary>
         void end_of_Draw_Fractal() {
-            //this.Activate();
             this.Enabled = true;
             Frac.isdrawing = false;
             this.pb.Hide();
@@ -905,8 +835,8 @@ namespace KDZ_1
             if (this.Frac.isdrawing) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;
-            posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
-            posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
+            posx = Frac.xspace;
+            posy = Frac.yspace;
             Frac.xleft = posx;
             Frac.yleft = posy;
             Frac.scale = 1;
@@ -926,8 +856,8 @@ namespace KDZ_1
             if (Frac == null) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;
-            posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
-            posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
+            posx = Frac.xspace;
+            posy = Frac.yspace;
             Frac.xleft = posx;
             Frac.yleft = posy;
             Frac.scale = 1;
@@ -960,90 +890,6 @@ namespace KDZ_1
             Dispose();
             Application.Exit();
         }
-
-        #region Old features
-        
-        //public Form1() : base()
-        //{
-        //    DoubleBuffered = true;
-        //    //Init();
-        //}
-
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void pictureBox_fractal_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox_dspace_TextChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_start_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-
-        /// <summary>
-        /// Not using method
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_end_color_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-
-        }
-        
-        /*private void checkBox_buffer_CheckedChanged(object sender, EventArgs e)
-        {
-            DoubleBuffered = checkBox_buffer.Checked;
-            Text = DoubleBuffered?"True":"False";
-        }*/
-
-        /// <summary>
-        /// Изменение масштаба через поле для ввода
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void textBox1_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (this.Frac.isdrawing) return;
-        //    float sc;
-        //    if (!(float.TryParse(this.textBox1.Text, out sc) && sc > 0 && sc <= 51.8)) { DropExWindow("Неверное значение масштаба"); return; }
-        //    if (Frac == null) return;
-        //    Frac.xspace = this.pictureBox1.Width;
-        //    Frac.yspace = 22;
-        //    //posx = Frac.xspace;//(Width - (Frac.xsize + Frac.space * 2) + Frac.xspace) / 2;
-        //    //posy = Frac.yspace;// (Height - (Frac.ysize + Frac.space * 2) + Frac.yspace) / 2;
-        //    Frac.xleft = posx;
-        //    Frac.yleft = posy;
-        //    Frac.scale = sc;
-        //    if (!Frac.scf || !Frac.ecf) return;
-        //    //DrawFractal();
-        //    //Rewrite();
-        //    //Invalidate();
-        //}
-
-        #endregion
         
     }
 

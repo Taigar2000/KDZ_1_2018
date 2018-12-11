@@ -8,7 +8,6 @@ namespace KDZ_1
 {
     class Cantor : Fractal
     {
-        //protected Line[] l;
         public float sizey = 10, dsizey=10;
         public Cantor() : base(){
             xsize = ysize = 600;
@@ -58,11 +57,7 @@ namespace KDZ_1
                     this.colorarrmax = (max_level_of_rec + 1);
                     this.colorarr = new Colorarr(colorarrmax, startColor, endColor);
                     this.colorarrstep = bindrob(colorarrmax, 2, max_level_of_rec);
-                    //this.colorarrmax = (mlor < 0 ? int.MaxValue : mlor);
-                    //this.colorarr = new Colorarr(colorarrmax);
-                    //this.colorarrstep = colorarrmax/mlor;
                 }
-                //graph.FillRectangle(System.Drawing.Brushes.White, 0, 0, (xsize + space * 2) * scale, (sizey * max_level_of_rec + dsizey * max_level_of_rec + space * 2) * scale);
             }
             else
             {
@@ -71,17 +66,9 @@ namespace KDZ_1
                     this.colorarrmax = (mlor + 1);
                     this.colorarr = new Colorarr(colorarrmax, startColor, endColor);
                     this.colorarrstep = bindrob(colorarrmax, 2, mlor);
-                    //this.colorarrmax = (mlor < 0 ? int.MaxValue : mlor);
-                    //this.colorarr = new Colorarr(colorarrmax);
-                    //this.colorarrstep = colorarrmax/mlor;
                 }
-                //graph.FillRectangle(System.Drawing.Brushes.White, 0, System.Math.Max(((pictureBoxYsize - (sizey * scale * mlor + dsizey * scale * Math.Max(mlor - 1, 0) + space * scale * 2) + yspace * scale) / 2) - yleft, 0), (xsize + space * 2) * scale, (sizey * mlor + dsizey * Math.Max(mlor - 1, 0) + space * 2) * scale);
             }
             graph.FillRectangle(System.Drawing.Brushes.White, 0, 0, (xsize + space * 2) * scale, (sizey + dsizey + space * 2) * scale);
-            //message = "" + pictureBoxXsize + "  " + pictureBoxYsize + "  " + (pictureBoxXsize - xsize + xspace) / 2 + "  " + (pictureBoxYsize - ysize + yspace) / 2 + "  " + (xsize + space * 2) + "  " + (ysize + space * 2);
-            //return;
-            //message = "" + mlor + "  " + max_level_of_rec;
-            //this.colorarr = new Colorarr(mlor);
             try
             {
                 rec(graph, 0 + space * scale, (System.Math.Max(((pictureBoxYsize - (sizey * scale * mlor + dsizey * scale * Math.Max(mlor - 1, 0)) + yspace * scale) / 2) - 0, 0) + space) * scale, xsize * scale, 0);
@@ -112,7 +99,6 @@ namespace KDZ_1
             {
 
             }
-            //this.pb.progressBar1.Value = Math.Min(pb.progressBar1.Maximum - 3, (int)(this.summ));
             level_of_rec = (int)lor;
             if (lor == max_level_of_rec)
             {
