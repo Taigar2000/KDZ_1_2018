@@ -1,4 +1,4 @@
-﻿//https://geekymonkey.com/Programming/CSharp/RGB2HSL_HSL2RGB.htm
+﻿//https://geekymonkey.com/
 using System;
 using System.Collections.Generic;
 using System.Linq;
