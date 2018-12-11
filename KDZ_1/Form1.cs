@@ -346,6 +346,12 @@ namespace KDZ_1
                 poy += dy;
                 posx += dx;
                 posy += dy;
+
+                if (posx > this.Width) posx = this.Width;
+                if (posx - pictureBox1.Width + (2*Frac.space + Frac.xsize)*Frac.scale < 0) posx = pictureBox1.Width - (2 * Frac.space + Frac.xsize) * Frac.scale;
+                if (posy + menuStrip1.Height > this.Height) posy = - menuStrip1.Height + this.Height;
+                if (posy - menuStrip1.Height + (2 * Frac.space + Frac.ysize) * Frac.scale < 0) posy = menuStrip1.Height - (2 * Frac.space + Frac.ysize) * Frac.scale;
+
                 Invalidate();
             }
         }
@@ -835,6 +841,8 @@ namespace KDZ_1
             if (this.Frac.isdrawing) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;
+            //posx = Frac.xspace - Frac.xsize * Frac.scale / 2 + (this.Width - Frac.xspace) / 2;
+            //posy = Frac.yspace - Frac.ysize * Frac.scale / 2 + (this.Height - Frac.yspace * 2) / 2;
             posx = Frac.xspace;
             posy = Frac.yspace;
             Frac.xleft = posx;
@@ -856,6 +864,8 @@ namespace KDZ_1
             if (Frac == null) return;
             Frac.xspace = this.pictureBox1.Width;
             Frac.yspace = 22;
+            //posx = Frac.xspace - Frac.xsize * Frac.scale / 2 + (this.Width - Frac.xspace) / 2;
+            //posy = Frac.yspace - Frac.ysize * Frac.scale / 2 + (this.Height - Frac.yspace * 2) / 2;
             posx = Frac.xspace;
             posy = Frac.yspace;
             Frac.xleft = posx;
