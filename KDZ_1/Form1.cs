@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GerasimenkoER_KDZ3_v2;
 
 namespace KDZ_1
 {
@@ -295,6 +297,8 @@ namespace KDZ_1
             }
         }
 
+        #region Move
+
         bool f = false;
         /// <summary>
         /// ЛКМ нажата
@@ -367,6 +371,91 @@ namespace KDZ_1
             if (this.Frac.isdrawing) return;
             Init();
         }
+
+        /// <summary>
+        /// Приближение в конкретной точке
+        /// </summary>
+        /// <param name="e"></param>
+        void ZoomUp(MouseEventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+            pox -= (posx - e.X) - (posx - e.X) * (float)(1.5);
+            poy -= (posy - e.Y) - (posy - e.Y) * (float)(1.5);
+            posx -= (posx - e.X) - (posx - e.X) * (float)(1.5);
+            posy -= (posy - e.Y) - (posy - e.Y) * (float)(1.5);
+            Frac.scale *= (float)1.5;
+            //Rewrite();
+        }
+        
+        /// <summary>
+        /// Приближение в левом верхнем углу
+        /// </summary>
+        void ZoomUp()
+        {
+            if (this.Frac.isdrawing) return;
+            Frac.scale *= (float)1.5;
+            this.textBox1.Text = Frac.scale.ToString();
+            Rewrite();
+        }
+
+        /// <summary>
+        /// Удаление в конкретной точке
+        /// </summary>
+        /// <param name="e"></param>
+        void ZoomDown(MouseEventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+            Frac.scale /= (float)1.5;
+            pox -= (posx - e.X) - (posx - e.X) / (float)(1.5);
+            poy -= (posy - e.Y) - (posy - e.Y) / (float)(1.5);
+            posx -= (posx - e.X) - (posx - e.X) / (float)(1.5);
+            posy -= (posy - e.Y) - (posy - e.Y) / (float)(1.5);
+            //Rewrite();
+        }
+
+        /// <summary>
+        /// Удаление в левом вехнем углу экрана
+        /// </summary>
+        void ZoomDown()
+        {
+            if (this.Frac.isdrawing) return;
+            Frac.scale /= (float)1.5;
+            this.textBox1.Text = Frac.scale.ToString();
+            Rewrite();
+        }
+
+        /// <summary>
+        /// Масштабирование изображения с помощью колёсика мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void pictureBox_fractal_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (this.Frac.isdrawing) return;
+            if (Frac == null || Frac.isdrawing) return;
+            if (Frac == null || bmp == null) return;
+            if (Frac.isdrawing) return;
+            if (e.Delta > 0)
+            {
+                ZoomUp(e);
+            }
+            else
+            {
+                ZoomDown(e);
+            }
+            this.label5.Text = $"Масштаб: ";
+            if (Frac == null)
+            {
+                this.textBox1.Text = "1";
+            }
+            else
+            {
+                this.textBox1.Text = $"{this.Frac.scale:f3}";
+            }
+            Rewrite();
+        }
+        
+        #endregion
 
         /// <summary>
         /// Отлов нажатий клавиш
@@ -479,88 +568,6 @@ namespace KDZ_1
             }
         }
 
-        /// <summary>
-        /// Приближение в конкретной точке
-        /// </summary>
-        /// <param name="e"></param>
-        void ZoomUp(MouseEventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-            pox -= (posx - e.X) - (posx - e.X) * (float)(1.5);
-            poy -= (posy - e.Y) - (posy - e.Y) * (float)(1.5);
-            posx -= (posx - e.X) - (posx - e.X) * (float)(1.5);
-            posy -= (posy - e.Y) - (posy - e.Y) * (float)(1.5);
-            Frac.scale *= (float)1.5;
-            //Rewrite();
-        }
-        
-        /// <summary>
-        /// Приближение в левом верхнем углу
-        /// </summary>
-        void ZoomUp()
-        {
-            if (this.Frac.isdrawing) return;
-            Frac.scale *= (float)1.5;
-            this.textBox1.Text = Frac.scale.ToString();
-            Rewrite();
-        }
-
-        /// <summary>
-        /// Удаление в конкретной точке
-        /// </summary>
-        /// <param name="e"></param>
-        void ZoomDown(MouseEventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-            Frac.scale /= (float)1.5;
-            pox -= (posx - e.X) - (posx - e.X) / (float)(1.5);
-            poy -= (posy - e.Y) - (posy - e.Y) / (float)(1.5);
-            posx -= (posx - e.X) - (posx - e.X) / (float)(1.5);
-            posy -= (posy - e.Y) - (posy - e.Y) / (float)(1.5);
-            //Rewrite();
-        }
-
-        /// <summary>
-        /// Удаление в левом вехнем углу экрана
-        /// </summary>
-        void ZoomDown()
-        {
-            if (this.Frac.isdrawing) return;
-            Frac.scale /= (float)1.5;
-            this.textBox1.Text = Frac.scale.ToString();
-            Rewrite();
-        }
-
-        /// <summary>
-        /// Масштабирование изображения с помощью колёсика мыши
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void pictureBox_fractal_MouseWheel(object sender, MouseEventArgs e)
-        {
-            if (this.Frac.isdrawing) return;
-            if (Frac == null || Frac.isdrawing) return;
-            if (Frac == null || bmp == null) return;
-            if (Frac.isdrawing) return;
-            if (e.Delta > 0)
-            {
-                ZoomUp(e);
-            }
-            else
-            {
-                ZoomDown(e);
-            }
-            this.label5.Text = $"Масштаб: ";
-            if (Frac == null)
-            {
-                this.textBox1.Text = "1";
-            }
-            else
-            {
-                this.textBox1.Text = $"{this.Frac.scale:f3}";
-            }
-            Rewrite();
-        }
 
         /// <summary>
         /// Перерисовываем фрактал
@@ -595,6 +602,8 @@ namespace KDZ_1
             }
             Invalidate();
         }
+
+        #region Save
 
         /// <summary>
         /// Сохранение изображения
@@ -673,11 +682,12 @@ namespace KDZ_1
         /// <param name="e"></param>
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //saveAsToolStripMenuItem_Click(sender, e);
             try
             {
                 if (Frac == null) throw (new NullReferenceException());
                 SaveFileDialog FBD = new SaveFileDialog();
-                FBD.Filter = "Изображения (*.bmp)|*.bmp|Все файлы (*.*)|*.*";
+                FBD.Filter = "JPEG files (*.jpg; *.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
                 if (FBD.ShowDialog() == DialogResult.OK)
                 {
                     name = FBD.FileName;
@@ -705,6 +715,166 @@ namespace KDZ_1
                 DropExWindow("" + ex.Message);
             }
         }
+
+        private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            saveToolStripMenuItem1_Click(sender, e);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            saveToolStripMenuItem1_Click(sender, e);
+        }
+
+        #endregion
+
+        #region Load
+
+        /// <summary>
+        /// Load data from file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (!SaveorLose(issaved))
+            //{
+            //    return;
+            //}
+            //if (encodingToolStripComboBox1.Text != "Encoding Type")
+            //{
+            //    //encodingToolStripComboBox1.Name
+            //    encode = Encoding.GetEncoding((int)int.Parse(encodingToolStripComboBox1.Text.Split(' ')[0]));
+            //}
+            //if (typeToolStripMenuItem.Text != "Separator Type")
+            //{ //typeToolStripMenuItem.Name  
+            //    separ = CSVconv.GetSeparType(typeToolStripMenuItem.Text[0]);
+            //}
+            //contextMenuStrip1.Show();
+            string str = "";
+            try
+            {
+                OpenFileDialog FBD = new OpenFileDialog();
+                FBD.AddExtension = false;
+                if (name.Length > 0) { FBD.FileName = name; }
+                FBD.Filter = "JPEG files (*.jpg; *.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+                //if (separ == ';') { FBD.FilterIndex = 3; }
+                //if (separ == ',') { FBD.FilterIndex = 1; }
+                //if (separ == '\t') { FBD.FilterIndex = 2; }
+
+                if (FBD.ShowDialog() == DialogResult.OK)
+                {
+                    bmp = new Bitmap(FBD.FileName);
+                    //if (isadded) { toolStripMenuItem5_Click(sender, e); }
+                    //separ = FBD.FilterIndex - 1 == 0 ? ',' : FBD.FilterIndex - 1 == 1 ? '\t' : FBD.FilterIndex - 1 == 2 ? ';' : FBD.FilterIndex - 1 == 3 ? '\t' : FBD.FilterIndex - 1 == 4 ? ';' : ',';//FBD.FileName[FBD.FileName.Length - 1];
+                    //name = FBD.FileName;//.Remove(FBD.FileName.Length - 1);
+                    //datas = CSVconv.fscanf(name, this.encode);
+                    //data = CSVconv.LoadCSVtoStr("" + name, separ, this.encode);
+                    //UpdateData(data, out opop, out adr);
+                    //UpdateGrid();
+                    //issaved = true;
+                }
+            }
+            catch (CSVException ex)
+            {
+                DropExWindow("Ошибка при загрузке данных из файла\n" + ex.Message + ex.InnerException?.Message);
+            }
+            catch (NullReferenceException ex)
+            {
+                DropExWindow("Невозможно загрузить несуществующий оъект\n" + ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                DropExWindow("Невозможно загрузить оъект\n" + ex.Message);
+            }
+            catch (System.Runtime.InteropServices.ExternalException ex)
+            {
+                DropExWindow("Невозможно загрузить оъект\n" + ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                DropExWindow(str + " because you give path in wrong format", ex);
+            }
+            catch (PathTooLongException ex)
+            {
+                DropExWindow(str + " because given path is too long", ex);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                DropExWindow(str + " because you give path to nonexistent directory", ex);
+            }
+            catch (FileNotFoundException ex)
+            {
+                DropExWindow(str + " because you give path to nonexistent file", ex);
+            }
+            catch (IOException ex)
+            {
+                DropExWindow(str + " because program has error when reading data from file", ex);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                DropExWindow(str + " because your permissions is insufficient to open this file", ex);
+            }
+            catch (NotSupportedException ex)
+            {
+                DropExWindow(str + " because stream does not support invoked functionality", ex);
+            }
+            catch (System.Security.SecurityException ex)
+            {
+                DropExWindow(str + " because program take security error", ex);
+            }
+            catch (Exception ex)
+            {
+                DropExWindow("" + ex.Message);
+            }
+        }
+
+        ///// <summary>
+        ///// Load data from file
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void loadToolStripMenuItem_Click(object sender, EventArgs e, bool f = true)
+        //{
+        //    //if (!SaveorLose(issaved))
+        //    //{
+        //    //    return;
+        //    //}
+        //    //contextMenuStrip1.Show(); c
+        //    try
+        //    {
+        //            List<List<string>> res = new List<List<string>>();
+        //            for (int i = 0; i < datas.Length; i++)
+        //            {
+        //                res.Add(CSVconv.ConvertCSVlinetoListstr(datas[i], separ));
+        //            }
+        //            data = res;
+        //        UpdateGrid();
+        //        //issaved = true;
+        //    }
+        //    catch (CSVException ex)
+        //    {
+        //        DropExWindow("Ошибка при загрузке файла\n" + ex.Message + ex.InnerException?.Message);
+        //    }
+        //    catch (NullReferenceException ex)
+        //    {
+        //        DropExWindow("Невозможно загрузить несуществующий оъект\n" + ex.Message);
+        //    }
+        //    catch (ArgumentNullException ex)
+        //    {
+        //        DropExWindow("Невозможно загрузить оъект\n" + ex.Message);
+        //    }
+        //    catch (System.Runtime.InteropServices.ExternalException ex)
+        //    {
+        //        DropExWindow("Невозможно загрузить оъект\n" + ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        DropExWindow("" + ex.Message);
+        //    }
+        //}
+
+        #endregion
 
         /// <summary>
         /// Новое окно фрактала
@@ -748,10 +918,14 @@ namespace KDZ_1
         /// Вывод сообщения об ошибке
         /// </summary>
         /// <param name="s"></param>
-        void DropExWindow(string s)
+        void DropExWindow(string s, Exception e = null)
         {
             if (flagmb) return;
             flagmb = true;
+            if (e != null)
+            {
+                s += "\n" + e.Message;
+            }
             if(MessageBox.Show(s) == DialogResult.OK)
             {
                 flagmb = false;
@@ -831,6 +1005,10 @@ namespace KDZ_1
             overAllWindowsToolStripMenuItem.Checked ^= true;
             TopMost = overAllWindowsToolStripMenuItem.Checked;
         }
+
+
+        
+
 
         /// <summary>
         /// Стартовые значения позиции и размера и перерисование фрактала
